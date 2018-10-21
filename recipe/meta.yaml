@@ -15,7 +15,11 @@ build:
 requirements:
   build:
     - posix  # [win]
-    - m2w64-toolchain  # [win]
+    - {{ compiler('c') }}        # [unix]
+    - {{ compiler('m2w64_c') }}  # [win]
+    - {{ compiler('cxx') }}        # [unix]
+    - {{ compiler('m2w64_cxx') }}  # [win]
+  host:
     - alsa-lib  # [linux]
   run:
     - alsa-lib  # [linux]
