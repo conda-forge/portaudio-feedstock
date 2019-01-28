@@ -1,12 +1,13 @@
 #!/bin/bash
 
 export LDFLAGS="${LDFLAGS} -L${PREFIX}/lib"
-export CFLAGS="${CFLAGS} -I${PREFIX}/include -fPIC"
-export CPPFLAGS="${CPPFLAGS} -I${PREFIX}/include"
-export CXXFLAGS="${CXXFLAGS} -I${PREFIX}/include"
+export CFLAGS="${CFLAGS} -L${PREFIX}/lib -I${PREFIX}/include -fPIC"
+export CPPFLAGS="${CPPFLAGS} -L${PREFIX}/lib -I${PREFIX}/include"
+export CXXFLAGS="${CXXFLAGS} -L${PREFIX}/lib -I${PREFIX}/include"
 
 echo "C compiler: ${CC}"
 echo "C++ compiler: ${CXX}"
+echo "Link path: ${PREFIX}/lib"
 
 ./configure --prefix="${PREFIX}" CC="${CC}" CXX="${CXX}"
 
