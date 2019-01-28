@@ -9,11 +9,14 @@ source:
   sha256: f5a21d7dcd6ee84397446fa1fa1a0675bb2e8a4a6dceb4305a8404698d8d1513
 
 build:
-  number: 0
+  number: 1
   skip: True  # [osx]
 
 requirements:
   build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+  host:
     - posix  # [win]
     - m2w64-toolchain  # [win]
     - alsa-lib  # [linux]
