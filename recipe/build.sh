@@ -1,10 +1,14 @@
 #!/bin/bash
 
-export LDFLAGS="-L${PREFIX}/lib $LDFLAGS"
-export CPPFLAGS="-I${PREFIX}/include $CPPFLAGS"
-export CFLAGS="-I${PREFIX}/include -fPIC $CFLAGS"
+export LDFLAGS="${LDFLAGS} -L${PREFIX}/lib"
+export CFLAGS="${CFLAGS} -I${PREFIX}/include -fPIC"
+export CPPFLAGS="${CPPFLAGS} -I${PREFIX}/include"
+export CXXFLAGS="${CXXFLAGS} -I${PREFIX}/include"
 
-./configure --prefix=$PREFIX
+echo "C compiler: ${CC}"
+echo "C++ compiler: ${CXX}"
+
+./configure --prefix="${PREFIX}" CC="${CC}" CXX="${CXX}"
 
 make -j$CPU_COUNT
 make tests -j$CPU_COUNT
