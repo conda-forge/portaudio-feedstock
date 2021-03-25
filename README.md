@@ -149,4 +149,5 @@ Feedstock Maintainers
 
 * [@ocefpaf](https://github.com/ocefpaf/)
 * [@scopatz](https://github.com/scopatz/)
+* [@traversaro](https://github.com/traversaro/)
 
