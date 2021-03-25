@@ -1,0 +1,22 @@
+From ec0499483a979059ea75f53c4bddd9f7a5815741 Mon Sep 17 00:00:00 2001
+From: Silvio Traversaro <silvio@traversaro.it>
+Date: Thu, 25 Mar 2021 10:59:50 +0100
+Subject: [PATCH] macOS: Remove -Werror configure
+
+---
+ configure | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/configure b/configure
+index 52314fe2..aaa34e20 100755
+--- a/configure
++++ b/configure
+@@ -15822,7 +15822,7 @@ case "${host_os}" in
+         $as_echo "#define PA_USE_COREAUDIO 1" >>confdefs.h
+ 
+ 
+-        CFLAGS="$CFLAGS -I\$(top_srcdir)/src/os/unix -Wno-deprecated -Werror"
++        CFLAGS="$CFLAGS -I\$(top_srcdir)/src/os/unix -Wno-deprecated"
+         LIBS="-framework CoreAudio -framework AudioToolbox -framework AudioUnit -framework Carbon"
+ 
+         if test "x$enable_mac_universal" = "xyes" ; then

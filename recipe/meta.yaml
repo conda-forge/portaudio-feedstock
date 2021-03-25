@@ -7,10 +7,11 @@ package:
 source:
   url: http://www.portaudio.com/archives/pa_stable_v{{ version }}.tgz
   sha256: f5a21d7dcd6ee84397446fa1fa1a0675bb2e8a4a6dceb4305a8404698d8d1513
+  patches:
+    - disable-werror-macos.patch  # [osx]
 
 build:
-  number: 3
-  skip: True  # [osx]
+  number: 4
 
 requirements:
   build:
@@ -18,6 +19,8 @@ requirements:
     - {{ compiler('cxx') }}        # [unix]
     - {{ compiler('m2w64_c') }}    # [win]
     - {{ compiler('m2w64_cxx') }}  # [win]
+    - {{ cdt('alsa-lib-devel') }}  # [linux]
+    - make                         # [unix]
   host:
     - posix  # [win]
     - m2w64-toolchain  # [win]
@@ -33,7 +36,7 @@ test:
 
 about:
   home: http://www.portaudio.com/
-  license: PortAudio
+  license: MIT
   license_file: LICENSE.txt
   summary: 'PortAudio is a free, cross-platform, open-source, audio I/O library.'
 
