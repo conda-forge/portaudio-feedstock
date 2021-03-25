@@ -9,21 +9,21 @@ source:
   sha256: f5a21d7dcd6ee84397446fa1fa1a0675bb2e8a4a6dceb4305a8404698d8d1513
   patches:
     - disable-werror-macos.patch  # [osx]
+    - empty-target-postfix.patch
 
 build:
   number: 4
+  run_exports:
+    - {{ pin_subpackage(name, max_pin='x.x') }}
 
 requirements:
   build:
-    - {{ compiler('c') }}          # [unix]
-    - {{ compiler('cxx') }}        # [unix]
-    - {{ compiler('m2w64_c') }}    # [win]
-    - {{ compiler('m2w64_cxx') }}  # [win]
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cmake  # [win]
     - {{ cdt('alsa-lib-devel') }}  # [linux]
     - make                         # [unix]
   host:
-    - posix  # [win]
-    - m2w64-toolchain  # [win]
     - alsa-lib  # [linux]
   run:
     - alsa-lib  # [linux]
@@ -31,8 +31,12 @@ requirements:
 test:
   commands:
     - test -f $PREFIX/lib/libportaudio$SHLIB_EXT  # [not win]
+    - test -f $PREFIX/include/portaudio.h  # [not win]
     - conda inspect linkages -p $PREFIX $PKG_NAME  # [not win]
     - conda inspect objects -p $PREFIX $PKG_NAME  # [osx]
+    - if not exist %PREFIX%\\Library\\include\\portaudio.h exit 1  # [win]
+    - if not exist $PREFIX$\\Library\\lib\\portaudio.lib exit 1  # [win]
+    - if not exist $PREFIX$\\Library\\bin\\portaudio.dll exit 1  # [win]
 
 about:
   home: http://www.portaudio.com/
@@ -44,3 +48,4 @@ extra:
   recipe-maintainers:
     - ocefpaf
     - scopatz
+    - traversaro
