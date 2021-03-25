@@ -1,10 +1,12 @@
-copy "%RECIPE_DIR%\build.sh" .
-set PREFIX=%PREFIX:\=/%
-set SRC_DIR=%SRC_DIR:\=/%
-set MSYSTEM=MINGW%ARCH%
-set MSYS2_PATH_TYPE=inherit
-set CHERE_INVOKING=1
-bash -lc "./build.sh"
+cmake -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
+      -DCMAKE_BUILD_TYPE=Release ^
+      -DTARGET_POSTFIX= ^
+      .
 if errorlevel 1 exit 1
 
-exit 0
+cmake --build . --target ALL_BUILD --config Release
+if errorlevel 1 exit 1
+
+copy /y Release\*.dll %LIBRARY_BIN%
+copy /y Release\*.lib %LIBRARY_LIB%
+copy /y include\*.h %LIBRARY_INC%
