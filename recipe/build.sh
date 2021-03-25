@@ -13,8 +13,8 @@ if [[ ${HOST} =~ .*darwin.* ]]; then
 fi
 
 ./configure "${CONFIG_OPTS[@]}"
-make
-make install
+make -j$CPU_COUNT
+make install -j$CPU_COUNT
 
 if [[ ${HOST} =~ .*darwin.* ]]; then
   cp include/pa_mac_core.h ${PREFIX}/include
