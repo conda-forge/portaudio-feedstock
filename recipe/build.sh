@@ -1,4 +1,7 @@
 #!/bin/bash
+# Get an updated config.sub and config.guess
+cp $BUILD_PREFIX/share/gnuconfig/config.* .
+cp $BUILD_PREFIX/share/gnuconfig/config.* ./bindings/cpp/build/gnu
 
 declare -a CONFIG_OPTS
 CONFIG_OPTS+=(--prefix=${PREFIX})
