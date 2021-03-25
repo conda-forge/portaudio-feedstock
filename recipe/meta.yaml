@@ -32,7 +32,7 @@ test:
 
 about:
   home: http://www.portaudio.com/
-  license: PortAudio
+  license: MIT
   license_file: LICENSE.txt
   summary: 'PortAudio is a free, cross-platform, open-source, audio I/O library.'
 
