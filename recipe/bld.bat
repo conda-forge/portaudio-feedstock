@@ -7,6 +7,6 @@ if errorlevel 1 exit 1
 cmake --build . --target ALL_BUILD --config Release
 if errorlevel 1 exit 1
 
-copy /y Release\*.dll %LIBRARY_BIN%
-copy /y Release\*.lib %LIBRARY_LIB%
+copy /y Release\portaudio.dll %LIBRARY_BIN%
+copy /y Release\portaudio.lib %LIBRARY_LIB%
 copy /y include\*.h %LIBRARY_INC%
