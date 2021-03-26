@@ -1,7 +1,8 @@
 {% set version = "190600_20161030" %}
+{% set name = "portaudio" %}
 
 package:
-  name: portaudio
+  name: {{ name }}
   version: 19.6.0
 
 source:
