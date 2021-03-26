@@ -18,6 +18,7 @@ build:
 
 requirements:
   build:
+    - gnuconfig  # [unix]
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - cmake  # [win]
@@ -32,8 +33,6 @@ test:
   commands:
     - test -f $PREFIX/lib/libportaudio$SHLIB_EXT  # [not win]
     - test -f $PREFIX/include/portaudio.h  # [not win]
-    - conda inspect linkages -p $PREFIX $PKG_NAME  # [not win]
-    - conda inspect objects -p $PREFIX $PKG_NAME  # [osx]
     - if not exist %PREFIX%\\Library\\include\\portaudio.h exit 1  # [win]
     - if not exist $PREFIX$\\Library\\lib\\portaudio.lib exit 1  # [win]
     - if not exist $PREFIX$\\Library\\bin\\portaudio.dll exit 1  # [win]
