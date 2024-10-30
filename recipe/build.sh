@@ -1,24 +1,15 @@
-#!/bin/bash
-# Get an updated config.sub and config.guess
-cp $BUILD_PREFIX/share/gnuconfig/config.* .
-cp $BUILD_PREFIX/share/gnuconfig/config.* ./bindings/cpp/build/gnu
+#!/bin/sh
 
-declare -a CONFIG_OPTS
-CONFIG_OPTS+=(--prefix=${PREFIX})
-CONFIG_OPTS+=(--with-pic)
-if [[ -n "${CONDA_BUILD_SYSROOT}" ]]; then
-  CONFIG_OPTS+=(--with-sysroot="${CONDA_BUILD_SYSROOT}")
-fi
-if [[ ${HOST} =~ .*darwin.* ]]; then
-  # Overrides the sysroot with an old one.
-  CONFIG_OPTS+=(--disable-mac-universal)
-  export CFLAGS="${CFLAGS} -Wno-deprecated-declarations"
-fi
+mkdir build && cd build
 
-./configure "${CONFIG_OPTS[@]}"
-make -j$CPU_COUNT
-make install -j$CPU_COUNT
+cmake ${CMAKE_ARGS} -DCMAKE_INSTALL_PREFIX=$PREFIX \
+      -DCMAKE_PREFIX_PATH=$PREFIX \
+      -DCMAKE_BUILD_TYPE=Release \
+      -DCMAKE_INSTALL_LIBDIR=lib \
+      -DBUILD_SHARED_LIBS=ON \
+      -DPA_LIBNAME_ADD_SUFFIX:BOOL=OFF \
+      -DPA_BUILD_STATIC:BOOL=OFF \
+      $SRC_DIR
 
-if [[ ${HOST} =~ .*darwin.* ]]; then
-  cp include/pa_mac_core.h ${PREFIX}/include
-fi
+make -j${CPU_COUNT}
+make install
