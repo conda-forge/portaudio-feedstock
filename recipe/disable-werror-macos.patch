@@ -11,12 +11,12 @@ diff --git a/configure b/configure
 index 52314fe2..aaa34e20 100755
 --- a/configure
 +++ b/configure
-@@ -15822,7 +15822,7 @@ case "${host_os}" in
+@@ -15842,7 +15842,7 @@ case "${host_os}" in
          $as_echo "#define PA_USE_COREAUDIO 1" >>confdefs.h
  
  
 -        CFLAGS="$CFLAGS -I\$(top_srcdir)/src/os/unix -Wno-deprecated -Werror"
 +        CFLAGS="$CFLAGS -I\$(top_srcdir)/src/os/unix -Wno-deprecated"
-         LIBS="-framework CoreAudio -framework AudioToolbox -framework AudioUnit -framework Carbon"
+         LIBS="-framework CoreAudio -framework AudioToolbox -framework AudioUnit -framework CoreFoundation -framework CoreServices"
  
          if test "x$enable_mac_universal" = "xyes" ; then
