@@ -18,13 +18,11 @@ build:
 
 requirements:
   build:
-    - gnuconfig  # [unix]
     - {{ compiler('c') }}
     - {{ stdlib('c') }}
     - {{ compiler('cxx') }}
     - cmake  # [win]
-    - {{ cdt('alsa-lib-devel') }}  # [linux]
-    - make                         # [unix]
+    - make  # [unix]
   host:
     - alsa-lib  # [linux]
   run:
