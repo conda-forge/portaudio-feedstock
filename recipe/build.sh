@@ -1,6 +1,6 @@
 #!/bin/sh
 
-mkdir build && cd build
+mkdir buildcmake && cd buildcmake
 
 cmake ${CMAKE_ARGS} -DCMAKE_INSTALL_PREFIX=$PREFIX \
       -DCMAKE_PREFIX_PATH=$PREFIX \
