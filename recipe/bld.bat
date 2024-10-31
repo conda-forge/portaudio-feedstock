@@ -1,12 +1,12 @@
-cmake -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
+cmake %CMAKE_ARGS% -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
       -DCMAKE_BUILD_TYPE=Release ^
-      -DTARGET_POSTFIX= ^
+      -DPA_LIBNAME_ADD_SUFFIX:BOOL=OFF ^
+      -DPA_BUILD_STATIC:BOOL=OFF ^
       .
 if errorlevel 1 exit 1
 
-cmake --build . --target ALL_BUILD --config Release
+cmake --build . --config Release
 if errorlevel 1 exit 1
 
-copy /y Release\portaudio.dll %LIBRARY_BIN%
-copy /y Release\portaudio.lib %LIBRARY_LIB%
-copy /y include\*.h %LIBRARY_INC%
+cmake --install . --config Release
+if errorlevel 1 exit 1

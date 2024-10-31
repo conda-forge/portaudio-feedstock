@@ -1,30 +1,28 @@
-{% set version = "190600_20161030" %}
+{% set version = "190700_20210406" %}
 {% set name = "portaudio" %}
 
 package:
   name: {{ name }}
-  version: 19.6.0
+  version: 19.7.0
 
 source:
-  url: http://www.portaudio.com/archives/pa_stable_v{{ version }}.tgz
-  sha256: f5a21d7dcd6ee84397446fa1fa1a0675bb2e8a4a6dceb4305a8404698d8d1513
+  url: https://files.portaudio.com/archives/pa_stable_v{{ version }}.tgz
+  sha256: 47efbf42c77c19a05d22e627d42873e991ec0c1357219c0d74ce6a2948cb2def
   patches:
     - disable-werror-macos.patch  # [osx]
-    - empty-target-postfix.patch
 
 build:
-  number: 9
+  number: 0
   run_exports:
     - {{ pin_subpackage(name, max_pin='x.x') }}
 
 requirements:
   build:
-    - gnuconfig  # [unix]
     - {{ compiler('c') }}
+    - {{ stdlib('c') }}
     - {{ compiler('cxx') }}
-    - cmake  # [win]
-    - {{ cdt('alsa-lib-devel') }}  # [linux]
-    - make                         # [unix]
+    - cmake
+    - make  # [unix]
   host:
     - alsa-lib  # [linux]
   run:
