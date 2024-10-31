@@ -21,7 +21,7 @@ requirements:
     - {{ compiler('c') }}
     - {{ stdlib('c') }}
     - {{ compiler('cxx') }}
-    - cmake  # [win]
+    - cmake
     - make  # [unix]
   host:
     - alsa-lib  # [linux]
